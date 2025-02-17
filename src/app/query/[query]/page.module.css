@@ -1,0 +1,6 @@
+.gridCsi{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background-color: red;
+    color: red;
+}
