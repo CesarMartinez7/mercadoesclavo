@@ -257,7 +257,7 @@ export interface SalePrice {
     conditions:            Conditions;
     currency_id:           CurrencyID;
     exchange_rate:         null;
-    payment_method_prices: any[];
+    payment_method_prices: unknown[];
     payment_method_type:   PaymentMethodType;
     regular_amount:        number | null;
     type:                  SalePriceType;

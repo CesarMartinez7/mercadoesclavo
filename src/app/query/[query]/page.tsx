@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Response } from "@/lib/types/response";
 import "./page.module.css";
+import Image from "next/image";
 
 
 
@@ -32,7 +33,7 @@ export default function Query() {
   useEffect(() => {
     asyncFetching()
     document.title = `${query} | MercadoLibre 📦`
-  }, [query]);
+  }, []);
 
   return (
     <main className="w-full gridCsi place-content-center grid mt-12 bg-graymercado">
@@ -43,9 +44,9 @@ export default function Query() {
             className="shadow-md flex  border-b-2 border-zinc-300 rounded-md flex-shrink-0 bg-white w-full "
           >
             <div className="bg-yellow-300 w-[33%]">
-              <img
+              <Image
                 src={`${item.thumbnail}`}
-                alt={`Heloo world${item.title}`}
+                alt={`Imagen${item.title}`}
                 className="w-full object-cover"
               />
             </div>
