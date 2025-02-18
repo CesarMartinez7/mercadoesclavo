@@ -14,7 +14,8 @@ export default {
         foreground: "var(--foreground)",
         whitemercado: "#FFFFFF",
         graymercado: "#EDEDED",
-        yellowmercado : "#FFE600"
+        yellowmercado : "#FFE600",
+        graytext : "#969696"
       },
     },
   },

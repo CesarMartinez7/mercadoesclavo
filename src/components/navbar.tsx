@@ -34,7 +34,7 @@ export default function Navbar() {
                   ref={inputRef}
                   type="text"
                   placeholder="Buscar productos, marcas y mas..."
-                  className="outline-none placeholder-[#737373] text-[15px] w-full"
+                  className="outline-none  placeholder-[#737373] text-[15px] w-full"
                 />
                 <span className="border-l-2 border-graymercado flex items-center justify-center pl-2">
                   <Icon
