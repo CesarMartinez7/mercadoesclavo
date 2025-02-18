@@ -3,3 +3,11 @@
 @tailwind utilities;
 
 
+.gridCsi{
+    width: 100%;
+    display: flex;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    place-content: center;
+
+}

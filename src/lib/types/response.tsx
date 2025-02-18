@@ -259,7 +259,7 @@ export interface SalePrice {
     exchange_rate:         null;
     payment_method_prices: unknown[];
     payment_method_type:   PaymentMethodType;
-    regular_amount:        number | null;
+    regular_amount:        number;
     type:                  SalePriceType;
     metadata:              SalePriceMetadata;
 }
