@@ -18,7 +18,7 @@ export default function Query() {
       "Content-Type": "application/json",
     },
   };
-  const asyncFetching = async () => {
+  const asyncFetching = async (ENDPOINT : string) => {
     const response = await fetch(ENDPOINT, opciones);
     if (!response.ok) {
       throw new Error("Error al obtener datos");
@@ -28,7 +28,7 @@ export default function Query() {
   };
 
   useEffect(() => {
-    asyncFetching();
+    asyncFetching(ENDPOINT);
     document.title = `${query} | MercadoLibre 📦`;
   }, []);
 
@@ -36,7 +36,7 @@ export default function Query() {
     <main className="w-full gridCsi mt-12 ">
       <div className="w-[300px] text-zinc-700 px-6 ">
         <div aria-label="Resultados y filtros" className="mb-4 ">
-          <p className="font-medium text-lg">{query}</p>
+          <p className="font-medium text-lg">{data?.query}</p>
           <p className="text-xs font-light">
             {data?.paging.total} <span>Resultados</span>
           </p>
@@ -48,7 +48,7 @@ export default function Query() {
                 <h3 className="text-sm ">{item.name}</h3>
                 <ul className="px-4">
                   {item.values.map((value) => (
-                    <li>
+                    <li key={value.id}>
                       {value.name}
                     </li>
                   ) )}
