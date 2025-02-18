@@ -1,16 +1,16 @@
 "use client";
 
+import ImagenEnvioGratis from "@/ui/image/envio.webp";
 import Image from "next/image";
-import ImagenEnvioGratis from "@/ui/image/enviogratis.webp";
-import MercadoLibreLogo from "@/ui/image/logo_large_25years_v2.png";
-import { Icon } from "@iconify/react";
-import { FormEvent} from "react";
-import { useEffect } from "react";
 
 export default function Home() {
   return (
-    <main >
-      Hello world
+    <main className="bg-gradient-to-t z-30 relative w-full h-[50vh]">
+      <div className="">
+        <Image src={ImagenEnvioGratis} className="w-full h-[50vh] object-cover"/>
+      </div>
+      <div className="absolute bg-gradient-to-t from-white to-transparent inset-0 ">
+      </div>
     </main>
-  )
+  );
 }

@@ -12,6 +12,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        whitemercado: "#FFFFFF",
+        graymercado: "#EDEDED",
+        yellowmercado : "#FFE600"
       },
     },
   },
