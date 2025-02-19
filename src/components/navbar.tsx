@@ -3,11 +3,18 @@ import Image from "next/image";
 import ImagenEnvioGratis from "@/ui/image/enviogratis.webp";
 import MercadoLibreLogo from "@/ui/image/logo_large_25years_v2.png";
 import { Icon } from "@iconify/react";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
-export default function Navbar() {
+
+interface NavbarProps {
+  categories: string[];
+}
+
+
+export default function Navbar({ categories = Categorias }: NavbarProps) {
+  const [isHiddenCategories, setIsHiddenCategories] = useState<boolean>(true);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const handleSubmit = (e: FormEvent) => {
@@ -15,7 +22,7 @@ export default function Navbar() {
     router.push(`/query/${inputRef.current?.value}`);
   };
   return (
-    <div className="bg-yellowmercado flex flex-nowrap items-center py-2 justify-center w-full shadow-md  ">
+    <div className="bg-yellowmercado flex flex-nowrap  py-2 justify-center w-full shadow-md  ">
       <header className="px-3 flex flex-col">
         <div className="flex justify-between gap-12  items-center mb-3 ">
           <div className="">
@@ -28,8 +35,8 @@ export default function Navbar() {
             />
           </div>
           <div>
-            <form onSubmit={handleSubmit}>
-              <label className="w-[400px] rounded-sm shadow-md bg-white h-full px-4 py-2 flex">
+            <form onSubmit={handleSubmit} className="w-full">
+              <label className="w-[500px] rounded-sm shadow-md bg-white h-full px-4 py-2 flex">
                 <input
                   ref={inputRef}
                   type="text"
@@ -72,10 +79,31 @@ export default function Navbar() {
               </div>
             </div>
             <div className="flex items-center gap-3 text-[13px]">
-              <p className="flex items-center">
-                Categorias{" "}
-                <Icon icon="mdi:chevron-down" width="14" height="14" />
-              </p>
+              <div className="relative inline-block">
+                <button
+                  className="flex items-center"
+                  aria-label="categorias"
+                  onMouseUp={() => {
+                    setIsHiddenCategories(!isHiddenCategories);
+                  }}
+                >
+                  Categorias{"    "}
+                  <Icon
+                    icon="mdi:chevron-down"
+                    width="14"
+                    height="14"
+                    className="text-zinc-400"
+                  />
+                </button>
+                {!isHiddenCategories && (
+                  <div className="absolute top-full mt-2 p-6 bg-zinc-800 shadow-lg h-fit z-50 rounded-md transition-all text-white flex flex-col items-start w-56 gap-3">
+                    📌 Popover básico sin librerías.
+                    {categories.map((category) => (
+                      <button key={crypto.randomUUID()} className="b-">{category}</button>
+                    ))}
+                  </div>
+                )}
+              </div>
               <p>Ofertas</p>
               <p>Cupones</p>
               <p>Supermercado</p>
@@ -88,14 +116,25 @@ export default function Navbar() {
               <span className="py-1 px-2 bg-whitemercado rounded-full">Ce</span>
               <p>Cesar</p>
               <span>
-                <Icon icon="mdi:chevron-down" width="14" height="14" className="text-gray-400"/>
+                <Icon
+                  icon="mdi:chevron-down"
+                  width="14"
+                  height="14"
+                  className="text-gray-400"
+                />
               </span>
             </div>
             <div className="flex-1 text-center whitespace-nowrap">
               <p>Mis compras</p>
             </div>
             <div className="flex-1 text-center">
-              <p>Favoritos</p>
+              <p className="flex items-center">Favoritos <span><Icon
+                    icon="mdi:chevron-down"
+                    width="14"
+                    height="14"
+                    className="text-zinc-400"
+                  /></span></p>
+              
             </div>
           </div>
         </div>
@@ -103,3 +142,27 @@ export default function Navbar() {
     </div>
   );
 }
+
+const Categorias : string[] = [
+  "Vehículos",
+  "Supermercado",
+  "Tecnología",
+  "Electrodomésticos",
+  "Hogar y Muebles",
+  "Deportes y Fitness",
+  "Belleza y Cuidado Personal",
+  "Accesorios para Vehículos",
+  "Herramientas",
+  "Construcción",
+  "Inmuebles",
+  "Compra Internacional",
+  "Moda",
+  "Juegos y Juguetes",
+  "Bebés",
+  "Productos Sustentables",
+  "Más vendido",
+  "Salud y Equipamiento Médico",
+  "Industrias y Oficinas",
+  "Servicios",
+  "Tiendas oficiales"
+];
