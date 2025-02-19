@@ -18,7 +18,7 @@ export default function Query() {
       "Content-Type": "application/json",
     },
   };
-  const asyncFetching = async (ENDPOINT : string) => {
+  const asyncFetching = async (ENDPOINT: string) => {
     const response = await fetch(ENDPOINT, opciones);
     if (!response.ok) {
       throw new Error("Error al obtener datos");
@@ -34,41 +34,46 @@ export default function Query() {
 
   return (
     <main className="w-full gridCsi mt-12 ">
-      <div className="w-[300px] text-zinc-700 px-6 ">
+      <div className="w-[250px] text-zinc-700 px-6 ">
         <div aria-label="Resultados y filtros" className="mb-4 ">
-          <p className="font-medium text-lg">{data?.query}</p>
+          <p className="font-medium text-lg">
+            {data?.query.slice(0, 1).toLocaleUpperCase()}
+            {data?.query.slice(1)}
+          </p>
           <p className="text-xs font-light">
-            {data?.paging.total} <span>Resultados</span>
+            {data?.paging.total.toLocaleString()} <span>Resultados</span>
           </p>
         </div>
-        <div>
+        <div className="flex flex-col gap-4">
           {data?.available_filters.map((item) => (
             <div key={item.id}>
               <div>
-                <h3 className="text-sm ">{item.name}</h3>
-                <ul className="px-4">
+                <h3 className="text-sm font-medium mb-2">{item.name}</h3>
+                <ul className="flex flex-col gap-1 ">
                   {item.values.map((value) => (
-                    <li key={value.id}>
-                      {value.name}
+                    <li key={value.id} className="text-xs  text-graytext">
+                      <button>
+                        {value.name} <span>({value.results.toLocaleString()})</span>
+                      </button>
                     </li>
-                  ) )}
+                  ))}
                 </ul>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <ul className="flex flex-shrink-0  w-[50vw] flex-col ">
+      <ul className="flex flex-shrink-0 w-[70vw] lg:w-[46vw] flex-col">
         {data?.results.map((item) => (
           <li
             key={item.id}
-            className="flex justify-between h-fit max-h-[290px] rounded-md border-b p-3 bg-white "
+            className="flex flex-shrink-0 justify-between h-fit max-h-[250px] rounded-xs border-b p-3 bg-white min-w-[300px]  "
           >
-            <div className="bg-yellow-300 w-[34%]">
+            <div className="w-[350px] ">
               <img
                 src={`${item.thumbnail}`}
                 alt={`Imagen${item.title}`}
-                className="w-full object-cover h-full"
+                className="w-full object-cover h-full  rounded-md"
               />
             </div>
             <div className="w-full  py-3 px-2">
@@ -79,7 +84,12 @@ export default function Query() {
                 <div className="font-light text-sm text-zinc-800 text-[12px] flex">
                   <p className="text-[13px] flex items-center gap-1.5">
                     Por {item.official_store_name}{" "}
-                    <Icon icon="mdi:verified" width="14" height="14" className="text-blue-500" />
+                    <Icon
+                      icon="mdi:verified"
+                      width="14"
+                      height="14"
+                      className="text-blue-500"
+                    />
                   </p>
                 </div>
               </div>
