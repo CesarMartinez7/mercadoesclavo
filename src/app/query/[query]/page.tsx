@@ -74,7 +74,7 @@ export default function Query() {
                 <h3 className="text-sm font-medium mb-2">{item.name}</h3>
                 <ul className="flex flex-col gap-1 ">
                   {item.values.map((value) => (
-                    <li key={value.id} className="text-xs  text-graytext">
+                    <li key={value.id} className="text-xs text-left text-graytext">
                       <button>
                         {value.name}{" "}
                         <span>({value.results.toLocaleString()})</span>
