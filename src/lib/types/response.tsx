@@ -114,7 +114,7 @@ export interface Result {
     installments_motors:   null;
     variation_id?:         string;
     variations_data?:      { [key: string]: VariationsDatum };
-    official_store_name?:  string;
+    official_store_name:  string;
 }
 
 export interface Address {

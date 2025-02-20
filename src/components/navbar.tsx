@@ -97,7 +97,6 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
                 </button>
                 {!isHiddenCategories && (
                   <div className="absolute top-full mt-2 p-6 bg-zinc-800 shadow-lg h-fit z-50 rounded-md transition-all text-white flex flex-col items-start w-56 gap-3">
-                    📌 Popover básico sin librerías.
                     {categories.map((category) => (
                       <button key={crypto.randomUUID()} className="b-">{category}</button>
                     ))}
