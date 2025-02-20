@@ -67,8 +67,8 @@ export interface Value {
     struct: null;
 }
 
-export interface Location {
-}
+// export interface Location {
+// }
 
 export interface Picture {
     id:         string;

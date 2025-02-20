@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ItemInterface } from "@/lib/types/response-item";
-import { Icon } from "@iconify/react/dist/iconify.js";
+// import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 
 // const opciones = {
@@ -67,7 +67,7 @@ export default function Item() {
               <p>
                 en{" "}
                 <span className="text-green-600">
-                  12 cuotas de ${data?.price / (12).toExponential(2)} con 0%
+                  12 cuotas de $ {Number(data?.price / (12))} con 0%
                   interes
                 </span>{" "}
               </p>

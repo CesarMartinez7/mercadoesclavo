@@ -37,7 +37,7 @@ export default function Query() {
   useEffect(() => {
     asyncFetching(ENDPOINT);
     document.title = `${query} | MercadoLibre 📦`;
-  }, []);
+  }, [query]);
 
   if (error) {
     <div>
