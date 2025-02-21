@@ -32,8 +32,8 @@ export default function Item() {
           </p>
         </div>
         <div className="p-6 bg-whitemercado w-[1100px] rounded-sm shadow-sm grid-cols-3 grid gap-6">
-          <div className="flex">
-            <div className="flex flex-col gap-1 rounded-md ">
+          <div className="flex gap-4  ">
+            <div className="flex flex-col  gap-1 rounded-md ">
               {data.pictures.map((img,index) => (
                 <div
                   key={img.id}
@@ -42,10 +42,6 @@ export default function Item() {
                   <Image src={img.secure_url} width={90} height={90} priority alt={` Imagen ${index} ${data.title}`}/>
                 </div>
               ))}
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
             </div>
             <div>
               <Image
@@ -57,7 +53,7 @@ export default function Item() {
               />
             </div>
           </div>
-          <div className=" p-4">
+          <div className="py-4">
             <section className="mt-12">
               <h3 className="font-medium text-xl">{data?.title}</h3>
               <div aria-label="Puntuacion" className="flex my-5">
