@@ -9,6 +9,9 @@ export default function Item() {
   const { id } = useParams();
   const [data, setData] = useState<ItemInterface>();
   const endpoint = `https://api.mercadolibre.com/items/${id}`;
+  // const [image, setImage] = useState<string | undefined>(
+  //   data?.pictures[0].secure_url
+  // );
   const fetchingAsync = async (endpoint: string) => {
     try {
       const response = await fetch(endpoint);
@@ -34,13 +37,20 @@ export default function Item() {
         <div className="p-6 bg-whitemercado w-[1100px] rounded-sm shadow-sm grid-cols-3 grid gap-6">
           <div className="flex gap-4  ">
             <div className="flex flex-col  gap-1 rounded-md ">
-              {data.pictures.map((img,index) => (
-                <div
+              {data.pictures.map((img, index) => (
+                <button
                   key={img.id}
                   className="p-2 border border-zinc-300 rounded-md"
                 >
-                  <Image src={img.secure_url} width={90} height={90} priority alt={` Imagen ${index} ${data.title}`}/>
-                </div>
+                  <Image
+                    src={img.secure_url}
+                    width={90}
+                    height={90}
+                    priority
+                    className="max-h-12 object-contain"
+                    alt={` Imagen ${index} ${data.title}`}
+                  />
+                </button>
               ))}
             </div>
             <div>
@@ -55,7 +65,7 @@ export default function Item() {
           </div>
           <div className="py-4">
             <section className="mt-12">
-              <h3 className="font-medium text-xl">{data?.title}</h3>
+              <h3 className="font-bold text-xl">{data?.title}</h3>
               <div aria-label="Puntuacion" className="flex my-5">
                 <Icon
                   icon="mdi:star"
@@ -105,7 +115,7 @@ export default function Item() {
                 Ver los medios de pago
               </button>
               <div className="text-sm" aria-label="Caracteristicas productos">
-                <h3 className="font-semibold text-zinc-700">
+                <h3 className="font-semibold text-zinc-700 mt-12  ">
                   Lo que tienes que saber de este producto
                 </h3>
                 <div className="list-disc text-[13px] text-zinc-700">
@@ -129,16 +139,15 @@ export default function Item() {
               </div>
             </section>
           </div>
-          <div className="flex flex-col">
+          <article className="flex flex-col ">
             <div className="py-[25px] px-[16px] border border-zinc-200  rounded-md">
               <div className=" flex flex-col gap-5 ">
                 <div>
                   <p className="text-sm">
                     <span className="text-green-500 font-semibold">
-                      {data.shipping.free_shipping
-                        ? "Envio gratis"
-                        : data.shipping.mode}
-                    </span>{" "}
+                      {data.shipping.free_shipping ? "Envio gratis " : `Envio`}
+                    </span>
+                    {""}
                     entre el sabado y lunes
                   </p>
                   <p className="text-blue-500 text-left text-sm">
@@ -167,9 +176,33 @@ export default function Item() {
                   Agregar al carrito
                 </button>
               </div>
+              <div className="text-sm mt-5">
+                <div className="text-zinc-600 flex items-start gap-3">
+                  <Icon icon="tabler:arrow-back" width="24" height="30" />
+                  <p>
+                    <span className="text-blue-500">Devolución gratis.</span>{" "}
+                    Tienes 30 días desde que lo recibes.
+                  </p>
+                </div>
+                <div className="text-zinc-600 flex items-start justify-between gap-3">
+                  <Icon
+                    icon="tabler:shield-check-filled"
+                    width="44"
+                    height="44"
+                  />
+                  <p>
+                    <span className="text-blue-500">Compra protegida</span> se
+                    abrirá en una nueva ventana, recibe el producto que
+                    esperabas o te devolvemos tu dinero.
+                  </p>
+                </div>
+                <div className="text-zinc-600 flex">
+                  12 meses de garantía de fábrica.
+                </div>
+              </div>
             </div>
-            <div></div>
-          </div>
+            <div>sdfdsf</div>
+          </article>
         </div>
       </div>
     );

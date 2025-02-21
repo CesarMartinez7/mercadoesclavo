@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <div classNameName="h-screen flex justify-center items-center">
-      <div classNameName="text-3xl w-[1100px] h-svh bg-slate-400 ">
+    <div className="h-screen flex justify-center items-center">
+      <div className="text-3xl w-[1100px] h-svh bg-slate-400 ">
         <div
           role="status"
           className="max-w-md p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded-sm shadow-sm animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"

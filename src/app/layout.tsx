@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/foooter";
+import {Ubuntu} from "next/font/google"
 
+
+const ubuntu = Ubuntu({weight: "300",subsets : ["latin"]})
 
 const Categorias : string[] = [
   "Vehículos",
@@ -44,7 +47,7 @@ export default function RootLayout({
     <html lang="en">
       <link rel="shortcut icon" href="./mercadologo.png" type="image/x-icon" />
       <body
-        className={` antialiased w-full h-full`}
+        className={` ${ubuntu.className}  antialiased w-full h-full`}
       >
         <Navbar categories={Categorias} />
         {children}

@@ -6,12 +6,11 @@ import { Icon } from "@iconify/react";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
-
+import Link from "next/link";
 
 interface NavbarProps {
   categories: string[];
 }
-
 
 export default function Navbar({ categories = Categorias }: NavbarProps) {
   const [isHiddenCategories, setIsHiddenCategories] = useState<boolean>(true);
@@ -25,7 +24,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
     <div className="bg-yellowmercado flex flex-nowrap  py-2 justify-center w-full shadow-md  ">
       <header className="px-3 flex flex-col">
         <div className="flex justify-between gap-12  items-center mb-3 ">
-          <div className="">
+          <Link href={"/"}>
             <Image
               src={MercadoLibreLogo}
               width={"134"}
@@ -33,7 +32,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
               alt="Imagen mercado libre logo"
               className="max-w-[340px] max-h-[39px]"
             />
-          </div>
+          </Link>
           <div>
             <form onSubmit={handleSubmit} className="w-full">
               <label className="w-[500px] rounded-sm shadow-md bg-white h-full px-4 py-2 flex">
@@ -97,8 +96,10 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
                 </button>
                 {!isHiddenCategories && (
                   <div className="absolute top-full mt-2 p-6 bg-zinc-800 shadow-lg h-fit z-50 rounded-md transition-all text-white flex flex-col items-start w-56 gap-3">
-                    {categories.map((category) => (
-                      <button key={crypto.randomUUID()} className="b-">{category}</button>
+                    {categories.map((category, index) => (
+                      <Link key={index} href={`/query/${category}`}>
+                        {category}
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -127,14 +128,21 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
               <p>Mis compras</p>
             </div>
             <div className="flex-1 text-center">
-              <p className="flex items-center">Favoritos <span><Icon
+              <p className="flex items-center">
+                Favoritos{" "}
+                <span>
+                  <Icon
                     icon="mdi:chevron-down"
                     width="14"
                     height="14"
                     className="text-zinc-400"
-                  /></span></p>
-              
+                  />
+                </span>
+              </p>
             </div>
+            <button>
+            <Icon icon="tabler:shopping-cart" width="20" height="20" />
+            </button>
           </div>
         </div>
       </header>
@@ -142,7 +150,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
   );
 }
 
-const Categorias : string[] = [
+const Categorias: string[] = [
   "Vehículos",
   "Supermercado",
   "Tecnología",
@@ -163,5 +171,5 @@ const Categorias : string[] = [
   "Salud y Equipamiento Médico",
   "Industrias y Oficinas",
   "Servicios",
-  "Tiendas oficiales"
+  "Tiendas oficiales",
 ];
