@@ -67,8 +67,7 @@ export default function Item() {
               <p>
                 en{" "}
                 <span className="text-green-600">
-                  12 cuotas de $ {Number(data?.price / (12))} con 0%
-                  interes
+                  12 cuotas de $ {Number(data?.price / 12)} con 0% interes
                 </span>{" "}
               </p>
               <button className="text-xs text-blue-500">
@@ -77,14 +76,39 @@ export default function Item() {
             </section>
           </div>
           <div className="flex flex-col">
-            <div className="py-[25px] px-[16px] border border-zinc-200 rounded-md">
-              <p className="text-sm">
-                <span className="text-green-500 font-medium">Llega gratis</span>{" "}
-                entre el sabado y lunes
-              </p>
+            <div className="py-[25px] px-[16px] border border-zinc-200  rounded-md">
+              <div className=" flex flex-col gap-5 ">
+                <div>
+                  <p className="text-sm">
+                    <span className="text-green-500 font-semibold">
+                      Llega gratis
+                    </span>{" "}
+                    entre el sabado y lunes
+                  </p>
+                  <p className="text-blue-500 text-left text-sm">
+                    Mas formas de entrega
+                  </p>
+                </div>
+                <div>
+                  <p className="font-semibold text-sm">Stock disponibles</p>
+                  <p className="text-zinc-500 text-sm">
+                    Almacenado y enviado por{" "}
+                    <span className="font-mono text-green-500">FULL</span>
+                  </p>
+                </div>
+                <div className="mb-8">
+                  <p className="text-zinc-600 text-sm">
+                    Cantidad <strong>1 unidad</strong> (25+ disponibles)
+                  </p>
+                </div>
+              </div>
               <div className="w-full flex gap-2 flex-col ">
-                  <button className="py-2.5 px-2 font-medium text-[14px] text-white bg-blue-500 rounded-md">Comprar ahora</button>
-                  <button className="bg-blue-100 py-2.5 px-2 font-medium text-blue-500 text-sm rounded-md">Agregar al carrito</button>
+                <button className="py-2.5 px-2 font-medium text-[14px] text-white bg-blue-500 rounded-md">
+                  Comprar ahora
+                </button>
+                <button className="bg-blue-100 py-2.5 px-2 font-medium text-blue-500 text-sm rounded-md">
+                  Agregar al carrito
+                </button>
               </div>
             </div>
             <div></div>
