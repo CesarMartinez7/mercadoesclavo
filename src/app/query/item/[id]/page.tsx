@@ -2,16 +2,8 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ItemInterface } from "@/lib/types/response-item";
-// import { Icon } from "@iconify/react/dist/iconify.js";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
-
-// const opciones = {
-//   method: "GET",
-//   headers: {
-//     Authorization: `Bearer ${accessToken}`,
-//     "Content-Type": "application/json",
-//   },
-// };
 
 export default function Item() {
   const { id } = useParams();
@@ -33,30 +25,73 @@ export default function Item() {
 
   if (data) {
     return (
-      <div className="bg-graymercado flex-col items-center flex w-full h-screen">
+      <div className="bg-graymercado flex-col items-center flex w-full ">
         <div className="w-[60vw]">
           <p className="text-blue-500 text-xs mt-3">
             Volver al listado Electrónica, Audio y Video Audio
           </p>
         </div>
-        <div className="p-6 bg-whitemercado w-[1100px] rounded-sm shadow-sm grid-cols-3 grid gap-2">
-          <div className="flex ">
-            <div>
+        <div className="p-6 bg-whitemercado w-[1100px] rounded-sm shadow-sm grid-cols-3 grid gap-6">
+          <div className="flex">
+            <div className="flex flex-col gap-1 rounded-md ">
+              {data.pictures.map((img,index) => (
+                <div
+                  key={img.id}
+                  className="p-2 border border-zinc-300 rounded-md"
+                >
+                  <Image src={img.secure_url} width={90} height={90} priority alt={` Imagen ${index} ${data.title}`}/>
+                </div>
+              ))}
               <div></div>
               <div></div>
               <div></div>
               <div></div>
             </div>
-            <Image
-              src={data?.pictures[0].secure_url}
-              alt={`Imagen de ${data?.title}`}
-              width={500}
-              height={500}
-            />
+            <div>
+              <Image
+                src={data?.pictures[0].secure_url}
+                alt={`Imagen de ${data?.title}`}
+                width={500}
+                height={500}
+                className="max-h-fit"
+              />
+            </div>
           </div>
           <div className=" p-4">
             <section className="mt-12">
               <h3 className="font-medium text-xl">{data?.title}</h3>
+              <div aria-label="Puntuacion" className="flex my-5">
+                <Icon
+                  icon="mdi:star"
+                  className="text-blue-500"
+                  width="15"
+                  height="15"
+                />
+                <Icon
+                  icon="mdi:star"
+                  className="text-blue-500"
+                  width="15"
+                  height="15"
+                />
+                <Icon
+                  icon="mdi:star"
+                  className="text-blue-500"
+                  width="15"
+                  height="15"
+                />
+                <Icon
+                  icon="mdi:star"
+                  className="text-blue-500"
+                  width="15"
+                  height="15"
+                />
+                <Icon
+                  icon="mdi:star"
+                  className="text-blue-500"
+                  width="15"
+                  height="15"
+                />
+              </div>
               <p className="text-sm text-graytext line-through">
                 $ {data?.price.toLocaleString()}
               </p>
@@ -73,6 +108,29 @@ export default function Item() {
               <button className="text-xs text-blue-500">
                 Ver los medios de pago
               </button>
+              <div className="text-sm" aria-label="Caracteristicas productos">
+                <h3 className="font-semibold text-zinc-700">
+                  Lo que tienes que saber de este producto
+                </h3>
+                <div className="list-disc text-[13px] text-zinc-700">
+                  {data.attributes.length > 12 ? (
+                    <ul className="mt-4 list-disc flex flex-col gap-1.5 pl-4">
+                      {data.attributes.slice(0, 11).map((attr) => (
+                        <li key={attr.id}>
+                          {attr.name} : {attr.value_name}
+                        </li>
+                      ))}
+                      <p className="text-blue-500">Ver mas caracteristicas</p>
+                    </ul>
+                  ) : (
+                    data.attributes.map((attr) => (
+                      <li key={attr.id}>
+                        {attr.name} : {attr.value_name}
+                      </li>
+                    ))
+                  )}
+                </div>
+              </div>
             </section>
           </div>
           <div className="flex flex-col">
@@ -81,7 +139,9 @@ export default function Item() {
                 <div>
                   <p className="text-sm">
                     <span className="text-green-500 font-semibold">
-                      Llega gratis
+                      {data.shipping.free_shipping
+                        ? "Envio gratis"
+                        : data.shipping.mode}
                     </span>{" "}
                     entre el sabado y lunes
                   </p>
@@ -98,7 +158,8 @@ export default function Item() {
                 </div>
                 <div className="mb-8">
                   <p className="text-zinc-600 text-sm">
-                    Cantidad <strong>1 unidad</strong> (25+ disponibles)
+                    Cantidad <strong>: 1 unidad</strong> (
+                    {data.initial_quantity}+ disponibles)
                   </p>
                 </div>
               </div>
