@@ -196,12 +196,13 @@ export default function Item() {
                     esperabas o te devolvemos tu dinero.
                   </p>
                 </div>
-                <div className="text-zinc-600 flex">
-                  12 meses de garantía de fábrica.
+                <div className="text-zinc-600 flex mt-4 items-start gap-1">
+                <Icon icon="tabler:lock-check" width="24" height="24" />
+                  <p>12 meses de garantía de fábrica.</p>
                 </div>
               </div>
             </div>
-            <div>sdfdsf</div>
+            
           </article>
         </div>
       </div>
