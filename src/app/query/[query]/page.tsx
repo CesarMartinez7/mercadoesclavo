@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import SkeletonItem from "@/components/skeleton-item";
 import Link from "next/link";
 
+
 export default function Query() {
   const accessToken = process.env.ACCES_TOKEN;
   const { query } = useParams();
@@ -37,7 +38,7 @@ export default function Query() {
   useEffect(() => {
     asyncFetching(ENDPOINT);
     document.title = `${query} | MercadoLibre 📦`;
-  }, [query]);
+  }, );
 
   if (error) {
     <div>
@@ -100,6 +101,8 @@ export default function Query() {
             >
               <div className="w-[350px] ">
                 <img
+                width={50}
+                height={60}
                   src={`${item.thumbnail}`}
                   alt={`Imagen${item.title}`}
                   className="w-full object-cover h-full  rounded-md"

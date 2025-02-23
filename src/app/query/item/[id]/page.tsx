@@ -7,11 +7,9 @@ import Image from "next/image";
 
 export default function Item() {
   const { id } = useParams();
+  const stringId : string | string[]= id ? id : "no se"
   const [data, setData] = useState<ItemInterface>();
-  const endpoint = `https://api.mercadolibre.com/items/${id}`;
-  // const [image, setImage] = useState<string | undefined>(
-  //   data?.pictures[0].secure_url
-  // );
+  const endpoint = `https://api.mercadolibre.com/items/${stringId}`;
   const fetchingAsync = async (endpoint: string) => {
     try {
       const response = await fetch(endpoint);
@@ -24,7 +22,7 @@ export default function Item() {
 
   useEffect(() => {
     fetchingAsync(endpoint);
-  }, [id]);
+  });
 
   if (data) {
     return (

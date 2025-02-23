@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import Footer from "@/components/foooter";
+// import Footer from "@/components/foooter";
 import {Ubuntu} from "next/font/google"
 
 
@@ -51,8 +51,8 @@ export default function RootLayout({
       >
         <Navbar categories={Categorias} />
         {children}
-        <Footer/>
       </body>
+        {/* <Footer/> */}
     </html>
   );
 }
