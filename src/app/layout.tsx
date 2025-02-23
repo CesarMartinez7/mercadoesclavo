@@ -1,14 +1,9 @@
-import type { Metadata } from "next";
-
 import "./globals.css";
 import Navbar from "@/components/navbar";
-// import Footer from "@/components/foooter";
-import {Ubuntu} from "next/font/google"
+import { Ubuntu } from "next/font/google";
+const ubuntu = Ubuntu({ weight: "300", subsets: ["latin"] });
 
-
-const ubuntu = Ubuntu({weight: "300",subsets : ["latin"]})
-
-const Categorias : string[] = [
+const Categorias: string[] = [
   "Vehículos",
   "Supermercado",
   "Tecnología",
@@ -29,14 +24,8 @@ const Categorias : string[] = [
   "Salud y Equipamiento Médico",
   "Industrias y Oficinas",
   "Servicios",
-  "Tiendas oficiales"
+  "Tiendas oficiales",
 ];
-
-
-export const metadata: Metadata = {
-  title: "Mercado Libre",
-  icons : "./mercadologo.png"
-};
 
 export default function RootLayout({
   children,
@@ -45,14 +34,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="shortcut icon" href="./mercadologo.png" type="image/x-icon" />
-      <body
-        className={` ${ubuntu.className}  antialiased w-full h-full`}
-      >
+      <body className={` ${ubuntu.className}  antialiased w-full h-full`}>
         <Navbar categories={Categorias} />
         {children}
+      {/* <Footer/>  */}
       </body>
-        {/* <Footer/> */}
     </html>
   );
 }
