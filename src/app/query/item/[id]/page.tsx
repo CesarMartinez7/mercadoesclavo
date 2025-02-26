@@ -22,7 +22,7 @@ export default function Item() {
 
   useEffect(() => {
     fetchingAsync(endpoint);
-  });
+  },[]);
 
   if (data) {
     return (

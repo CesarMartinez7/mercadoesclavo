@@ -8,14 +8,18 @@ import SkeletonItem from "@/components/skeleton-item";
 import Link from "next/link";
 
 
+
+
+
 export default function Query() {
   const accessToken = process.env.ACCES_TOKEN;
   const { query } = useParams();
+  const [filter,setIsFilter] = useState("&discount=20-50")
   const [data, setData] = useState<Response>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
 
-  const ENDPOINT = `https://api.mercadolibre.com/sites/MLA/search?q=${query}`;
+  const ENDPOINT = `https://api.mercadolibre.com/sites/MLA/search?q=${query}&${filter}`;
   const opciones = {
     method: "GET",
     headers: {
@@ -38,7 +42,7 @@ export default function Query() {
   useEffect(() => {
     asyncFetching(ENDPOINT);
     document.title = `${query} | MercadoLibre 📦`;
-  }, );
+  }, [query,filter]);
 
   if (error) {
     <div>
@@ -57,7 +61,7 @@ export default function Query() {
   }
 
   return (
-    <main className="w-full gridCsi mt-12 ">
+    <main className="w-full gridCsi mt-12 ">  
       <div className="w-[250px] text-zinc-700 px-6 ">
         <div aria-label="Resultados y filtros" className="mb-4 ">
           <p className="font-medium text-lg">
@@ -75,12 +79,14 @@ export default function Query() {
                 <h3 className="text-sm font-medium mb-2">{item.name}</h3>
                 <ul className="flex flex-col gap-1 ">
                   {item.values.map((value) => (
-                    <li key={value.id} className="text-xs text-left text-graytext">
+                    <button key={value.id} onClick={() => {
+                      setIsFilter(`${item.id}${value.id}`)
+                    }} className="text-xs text-left text-graytext ">
                       <button>
                         {value.name}{" "}
                         <span>({value.results.toLocaleString()})</span>
                       </button>
-                    </li>
+                    </button>
                   ))}
                 </ul>
               </div>
@@ -89,7 +95,7 @@ export default function Query() {
         </div>
       </div>
       {/* // Mapeo de items de productos */}
-      <ul className="flex flex-shrink-0 w-[70vw] lg:w-[46vw] flex-col">
+      <ul className="flex flex-shrink-0 w-[70vw] lg:w-[46vw]  flex-col">
         {data?.results.map((item) => {
           const isPatrocinado =
             item.official_store_name === undefined || "" ? false : true;
@@ -97,7 +103,7 @@ export default function Query() {
             <Link
               href={`item/${item.id}`}
               key={item.id}
-              className="flex flex-shrink-0 justify-between h-fit max-h-[250px] rounded-xs border-b p-3 bg-white min-w-[300px]  "
+              className="flex flex-shrink-0 justify-between h-fit max-h-[250px] rounded-xs border-b p-3 bg-white min-w-[300px]   "
             >
               <div className="w-[350px] ">
                 <img
