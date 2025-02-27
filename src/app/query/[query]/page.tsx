@@ -4,15 +4,16 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Response } from "@/lib/types/response";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import SkeletonItem from "@/components/skeleton-item";
 import Link from "next/link";
+import Loading from "./loading";
+
+const accessToken = process.env.ACCES_TOKEN;
 
 
 
 
 
 export default function Query() {
-  const accessToken = process.env.ACCES_TOKEN;
   const { query } = useParams();
   const [filter,setIsFilter] = useState("&discount=20-50")
   const [data, setData] = useState<Response>();
@@ -50,11 +51,8 @@ export default function Query() {
     </div>;
   }
 
-  if (isLoading) {
-    <div>
-      <SkeletonItem />
-    </div>;
-  }
+  if (isLoading) return <Loading/>
+  
 
   if (data?.results.length === 0) {
     <div>No hay resultados de tu producto</div>;

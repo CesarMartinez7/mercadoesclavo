@@ -21,7 +21,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
     router.push(`/query/${inputRef.current?.value}`);
   };
   return (
-    <div className="bg-yellowmercado flex flex-nowrap  py-2 justify-center w-full shadow-md  ">
+    <div className="bg-yellowmercado flex flex-nowrap z-50  py-2 justify-center w-full shadow-md">
       <header className="px-3 flex flex-col">
         <div className="flex justify-between gap-12  items-center mb-3 ">
           <Link href={"/"}>

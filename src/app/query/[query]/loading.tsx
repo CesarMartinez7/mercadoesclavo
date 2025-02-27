@@ -1,8 +1,15 @@
+import { SkeletonItem2 } from "@/components/skeletons/item-skeleton";
+
 export default function Loading() {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-xl font-semibold">Cargando productos...</p>
-      </div>
-    );
-  }
-  
+  return (
+    <ul className="flex z-10 items-center justify-center h-screen flex-col">
+      {Array.from({ length: 12 }, (_, i) => (
+        <li key={i}>
+          <SkeletonItem2 />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+

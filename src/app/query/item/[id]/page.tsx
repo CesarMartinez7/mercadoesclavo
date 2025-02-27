@@ -5,6 +5,9 @@ import { ItemInterface } from "@/lib/types/response-item";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 
+
+
+
 export default function Item() {
   const { id } = useParams();
   const stringId : string | string[]= id ? id : "no se"
