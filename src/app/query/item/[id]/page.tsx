@@ -5,14 +5,13 @@ import { ItemInterface } from "@/lib/types/response-item";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 
-
-
-
 export default function Item() {
   const { id } = useParams();
-  const stringId : string | string[]= id ? id : "no se"
+  const stringId: string | string[] = id ? id : "no se";
   const [data, setData] = useState<ItemInterface>();
   const endpoint = `https://api.mercadolibre.com/items/${stringId}`;
+  const [image, setImage] = useState<string>("");
+
   const fetchingAsync = async (endpoint: string) => {
     try {
       const response = await fetch(endpoint);
@@ -25,7 +24,14 @@ export default function Item() {
 
   useEffect(() => {
     fetchingAsync(endpoint);
-  },[]);
+  }, []);
+
+  useEffect(() => {
+    if(data?.pictures){
+      setImage(data?.pictures[0].secure_url)
+    }
+  },[])
+
 
   if (data) {
     return (
@@ -40,6 +46,9 @@ export default function Item() {
             <div className="flex flex-col  gap-1 rounded-md ">
               {data.pictures.map((img, index) => (
                 <button
+                  onMouseEnter={() => {
+                    setImage(img.secure_url);
+                  }}
                   key={img.id}
                   className="p-2 border border-zinc-300 rounded-md"
                 >
@@ -49,14 +58,14 @@ export default function Item() {
                     height={90}
                     priority
                     className="max-h-12 object-contain"
-                    alt={` Imagen ${index} ${data.title}`}
+                    alt={`Imagen ${index} ${data.title}`}
                   />
                 </button>
               ))}
             </div>
-            <div>
+            <div aria-label="images ascesibles" >
               <Image
-                src={data?.pictures[0].secure_url}
+                src={image ? image : data.pictures[0].secure_url }
                 alt={`Imagen de ${data?.title}`}
                 width={500}
                 height={500}
@@ -198,12 +207,11 @@ export default function Item() {
                   </p>
                 </div>
                 <div className="text-zinc-600 flex mt-4 items-start gap-1">
-                <Icon icon="tabler:lock-check" width="24" height="24" />
+                  <Icon icon="tabler:lock-check" width="24" height="24" />
                   <p>12 meses de garantía de fábrica.</p>
                 </div>
               </div>
             </div>
-            
           </article>
         </div>
       </div>
