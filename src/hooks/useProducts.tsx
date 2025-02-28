@@ -23,7 +23,7 @@ const opciones = {
 };
 
 interface ReturnUseProducts {
-  data: Response;
+  data?: Response;
   filter: string;
   isLoading: boolean;
   error: boolean;
@@ -66,6 +66,6 @@ export default function UseProducts(): ReturnUseProducts {
   if (data) {
     return { data, filter, isLoading, error, setFilter };
   }
-return { data, filter, isLoading, error, setFilter };
-
+  return { data, filter, isLoading, error, setFilter };
+  
 }
