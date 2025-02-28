@@ -118,7 +118,7 @@ export default function Item() {
               <p>
                 en{" "}
                 <span className="text-green-600">
-                  12 cuotas de $ {Number(data?.price / 12)} con 0% interes
+                  12 cuotas de $ {Number(data?.price / 12).toString().slice(0,7)} con 0% interes
                 </span>{" "}
               </p>
               <button className="text-xs text-blue-500">

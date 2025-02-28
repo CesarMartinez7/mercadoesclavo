@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Response } from "@/lib/types/response";
 import SkeletonItem1 from "@/components/skeletons/item-skeleton";
+import Link from "next/link";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const accessToken = process.env.ASCES_TOKEN;
 
@@ -27,9 +29,9 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => {
         setData(data);
-        setLoading(false); // Cuando termina de cargar, cambia el estado
+        setLoading(false);
       });
-  }, []); // Se ejecuta solo una vez al montar el componente
+  }, []);
 
   return (
     <main className="bg-gradient-to-t z-30 relative w-full h-[50vh]">
@@ -49,7 +51,11 @@ export default function Home() {
                   <SkeletonItem1 key={index} /> // Renderiza el Skeleton mientras carga
                 ))
               : data?.results.slice(5, 10).map((i) => (
-                  <li key={i.id} className="p-3 border w-full grid shadow-sm rounded-md">
+                  <Link
+                    href={`/query/item/${i.id}`}
+                    key={i.id}
+                    className="p-3 border w-full grid shadow-sm rounded-md"
+                  >
                     <div className="w-full">
                       <img
                         className="w-full"
@@ -60,35 +66,69 @@ export default function Home() {
                       />
                     </div>
                     <div className="mt-4 w-full">
-                      <p className="text-xs w-full h-[29px] overflow-hidden overflow-ellipsis w-full">
+                      <p className="text-xs w-full h-[29px] overflow-hidden overflow-ellipsis ">
                         {i.title}
                       </p>
-                      <p className="text-zinc-600 text-xs line-through"> $ {i.original_price}</p>
-                      <p className="font-semibold">$ {i.price}</p>
+                      <p className="text-zinc-600 text-xs line-through">
+                        {" "}
+                        $ {i.original_price?.toLocaleString()}
+                      </p>
+                      <p className="font-semibold">
+                        $ {i.price.toLocaleString()}
+                      </p>
                       <p className="text-xs text-green-500 font-bold">
-                        {i.shipping.free_shipping ? "Envío gratis" : i.shipping.benefits}
+                        {i.shipping.free_shipping
+                          ? "Envío gratis"
+                          : i.shipping.benefits}
                       </p>
                     </div>
-                  </li>
+                  </Link>
                 ))}
           </ul>
-
           <div className="bg-whitespace border p-5 flex-shrink-0 rounded-md shadow-md">
-            <h3 className="font-semibold text-lg">Inspirado en lo último que viste</h3>
-            <ul className="flex flex-shrink-0 p-3 w-full overflow-x-scroll gap-2">
+            <h3 className="font-semibold text-lg">
+              Inspirado en lo último que viste
+            </h3>
+            <ul className="flex relative flex-shrink-0 p-3 w-full overflow-x-scroll gap-2">
+              <div className="absolute  inset-0 w-full flex justify-between h-full items-center">
+                <button className="px-3 py-1 flex items-center bg-whitemercado h-12 border rounded-full">
+                <Icon
+                    icon="mdi:keyboard-arrow-left"
+                    width="20"
+                    height="20"
+                    className="text-blue-500"
+                  />
+                </button>
+                <button className="px-3 py-1 bg-whitemercado flex items-center h-12  rounded-full border ">
+                  <Icon
+                    icon="mdi:keyboard-arrow-right"
+                    width="20"
+                    height="20"
+                    className="text-blue-500"
+                  />
+                </button>
+              </div>
               {loading
                 ? Array.from({ length: 5 }).map((_, index) => (
                     <SkeletonItem1 key={index} />
                   ))
                 : data?.results.slice(0, 12).map((item) => (
-                    <li className="flex-shrink-0 border rounded p-1 max-w-[180px]" key={item.id}>
+                    <Link
+                      href={`/query/item/${item.id}`}
+                      className="flex-shrink-0 border rounded p-1 max-w-[180px]"
+                      key={item.id}
+                    >
                       <div className="w-full">
-                        <img src={item.thumbnail} alt="sfsd" className="w-full" />
+                        <img
+                          src={item.thumbnail}
+                          alt="sfsd"
+                          className="w-full"
+                        />
                       </div>
                       <p className="text-xs h-[29px] overflow-hidden overflow-ellipsis w-full">
                         {item.title}
                       </p>
-                    </li>
+                    </Link>
                   ))}
             </ul>
           </div>
