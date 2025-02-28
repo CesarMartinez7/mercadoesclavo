@@ -35,10 +35,10 @@ export default function Item() {
 
   if (data) {
     return (
-      <div className="bg-graymercado flex-col items-center flex w-full ">
-        <div className="w-[60vw]">
-          <p className="text-blue-500 text-xs mt-3">
-            Volver al listado Electrónica, Audio y Video Audio
+      <div className="bg-graymercado flex-col items-center flex gap-4 w-full ">
+        <div className="w-[60vw]  ">
+          <p className="text-blue-500 text-xs mt-3 px-6">
+            Volver al listado Electrónica {">"} {`${data.title}`} 
           </p>
         </div>
         <div className="p-6 bg-whitemercado w-[1100px] rounded-sm shadow-sm grid-cols-3 grid gap-6">

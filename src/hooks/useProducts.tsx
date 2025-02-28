@@ -34,7 +34,7 @@ export default function UseProducts(): ReturnUseProducts {
   const { query } = useParams();
   const [filter, setFilter] = useState("");
   const [data, setData] = useState<Response>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(true);
 
   const asyncFetching = async (ENDPOINT: string, opciones: OpcionesType) => {
