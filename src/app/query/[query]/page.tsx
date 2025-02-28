@@ -12,7 +12,7 @@ const accessToken = process.env.ACCES_TOKEN;
 
 export default function Query() {
   const { query } = useParams();
-  const [filter, setIsFilter] = useState("&discount=20-50");
+  const [filter, setIsFilter] = useState("");
   const [data, setData] = useState<Response>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(true);
@@ -47,7 +47,7 @@ export default function Query() {
 
   useEffect(() => {
     asyncFetching(ENDPOINT);
-  }, [query, filter]);
+  }, [filter]);
 
   if (error) {
     <div>
@@ -83,7 +83,8 @@ export default function Query() {
                     <button
                       key={value.id}
                       onClick={() => {
-                        setIsFilter(`${item.id}${value.id}`);
+                        window.alert(filter)
+                        setIsFilter(`${filter}${item.id}=${value.id}`);
                       }}
                       className="text-xs text-left text-graytext "
                     >
