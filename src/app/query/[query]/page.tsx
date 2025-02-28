@@ -1,59 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { Response } from "@/lib/types/response";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import Loading from "./loading";
 import Image from "next/image";
-
-const accessToken = process.env.ACCES_TOKEN;
+import UseProducts from "@/hooks/useProducts";
 
 export default function Query() {
-  const { query } = useParams();
-  const [filter, setIsFilter] = useState("");
-  const [data, setData] = useState<Response>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(true);
+  const { filter, data, isLoading, error, setFilter } = UseProducts();
 
-  const ENDPOINT = `https://api.mercadolibre.com/sites/MLA/search?q=${query}&${filter}`;
-  const opciones = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  };
-  const asyncFetching = async (ENDPOINT: string) => {
-    const response = await fetch(ENDPOINT, opciones);
-    if (response.ok) {
-      const data = await response.json();
-      setData(data);
-      setIsLoading(false);
-    } else {
-      setError(true);
-      throw new Error("Error al obtener datos");
-    }
-  };
-
-  useEffect(() => {
-    if(query){
-      document.title = `${
-        query?.slice(0, 1).toString().toUpperCase() + query?.slice(1)
-      } | MercadoLibre 📦`;
-    }
-  },[query])
-
-  useEffect(() => {
-    asyncFetching(ENDPOINT);
-  }, [filter]);
-
-  if (error) {
-    <div>
-      <p>Ha ocurrido un error</p>
-    </div>;
-  }
+  if (error) <Error />;
 
   if (isLoading) return <Loading />;
 
@@ -81,10 +37,11 @@ export default function Query() {
                 <ul className="flex flex-col gap-1 ">
                   {item.values.map((value) => (
                     <button
+                      title={`filter ${value.name}`}
                       key={value.id}
                       onClick={() => {
-                        window.alert(filter)
-                        setIsFilter(`${filter}${item.id}=${value.id}`);
+                        window.alert(filter);
+                        setFilter(`&${filter}${item.id}=${value.id}`);
                       }}
                       className="text-xs text-left text-graytext "
                     >
@@ -181,7 +138,7 @@ export default function Query() {
                   </p>
                 </div>
                 <div className="flex flex-shrink-0 justify-end text-graytext text-xs">
-                  <li>{isPatrocinado ? "Promocionado" : ""} </li>
+                  {isPatrocinado ? (<li>{"Promocionado"}</li>)  : <li></li>} 
                 </div>
               </div>
             </Link>
@@ -191,3 +148,7 @@ export default function Query() {
     </main>
   );
 }
+
+const Error = () => {
+  return <div>Error</div>;
+};
