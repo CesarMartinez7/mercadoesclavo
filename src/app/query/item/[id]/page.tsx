@@ -57,7 +57,7 @@ export default function Item() {
                     width={90}
                     height={90}
                     priority
-                    className="max-h-12 object-contain"
+                    className="max-h-10 object-contain"
                     alt={`Imagen ${index} ${data.title}`}
                   />
                 </button>
@@ -70,6 +70,7 @@ export default function Item() {
                 width={500}
                 height={500}
                 className="max-h-fit"
+                priority
               />
             </div>
           </div>

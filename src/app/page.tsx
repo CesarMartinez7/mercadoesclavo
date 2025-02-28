@@ -57,7 +57,7 @@ export default function Home() {
                     className="p-3 border w-full grid shadow-sm rounded-md"
                   >
                     <div className="w-full">
-                      <img
+                      <Image
                         className="w-full"
                         src={i.thumbnail}
                         width={50}
@@ -69,10 +69,14 @@ export default function Home() {
                       <p className="text-xs w-full h-[29px] overflow-hidden overflow-ellipsis ">
                         {i.title}
                       </p>
-                      <p className="text-zinc-600 text-xs line-through">
-                        {" "}
-                        $ {i.original_price?.toLocaleString()}
-                      </p>
+                      {i.original_price ? (
+                        <p className="text-zinc-600 text-xs line-through">
+                          {" "}
+                          $ {i.original_price?.toLocaleString()}
+                        </p>
+                      ) : (
+                        ""
+                      )}
                       <p className="font-semibold">
                         $ {i.price.toLocaleString()}
                       </p>
@@ -90,9 +94,9 @@ export default function Home() {
               Inspirado en lo último que viste
             </h3>
             <ul className="flex relative flex-shrink-0 p-3 w-full overflow-x-scroll gap-2">
-              <div className="absolute  inset-0 w-full flex justify-between h-full items-center">
-                <button className="px-3 py-1 flex items-center bg-whitemercado h-12 border rounded-full">
-                <Icon
+              <div className="absolute inset-0 z-0 w-full flex justify-between h-full items-center">
+                <button className="px-3 py-1 z-10 flex items-center bg-whitemercado h-12 border rounded-full">
+                  <Icon
                     icon="mdi:keyboard-arrow-left"
                     width="20"
                     height="20"
@@ -115,11 +119,14 @@ export default function Home() {
                 : data?.results.slice(0, 12).map((item) => (
                     <Link
                       href={`/query/item/${item.id}`}
-                      className="flex-shrink-0 border rounded p-1 max-w-[180px]"
+                      className="flex-shrink-0 border rounded p-2 max-w-[180px]"
                       key={item.id}
                     >
                       <div className="w-full">
-                        <img
+                        <Image
+                          width={50}
+                          height={50}
+                          priority
                           src={item.thumbnail}
                           alt="sfsd"
                           className="w-full"
@@ -128,6 +135,18 @@ export default function Home() {
                       <p className="text-xs h-[29px] overflow-hidden overflow-ellipsis w-full">
                         {item.title}
                       </p>
+                      {item.original_price ? (
+                        <p className="text-zinc-600 text-xs line-through">
+                          {" "}
+                          $ {item.original_price?.toLocaleString()}
+                        </p>
+                      ) : (
+                        ""
+                      )}
+                      <p className="font-semibold">
+                        $ {item.price.toLocaleString()}
+                      </p>
+                      <p className="text-xs text-green-500">{item.shipping.free_shipping ? "Envio gratis" : ""}</p>
                     </Link>
                   ))}
             </ul>

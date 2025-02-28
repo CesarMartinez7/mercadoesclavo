@@ -6,19 +6,16 @@ import { Response } from "@/lib/types/response";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import Loading from "./loading";
+import Image from "next/image";
 
 const accessToken = process.env.ACCES_TOKEN;
 
-
-
-
-
 export default function Query() {
   const { query } = useParams();
-  const [filter,setIsFilter] = useState("&discount=20-50")
+  const [filter, setIsFilter] = useState("&discount=20-50");
   const [data, setData] = useState<Response>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(true);
 
   const ENDPOINT = `https://api.mercadolibre.com/sites/MLA/search?q=${query}&${filter}`;
   const opciones = {
@@ -41,9 +38,16 @@ export default function Query() {
   };
 
   useEffect(() => {
+    if(query){
+      document.title = `${
+        query?.slice(0, 1).toString().toUpperCase() + query?.slice(1)
+      } | MercadoLibre 📦`;
+    }
+  },[query])
+
+  useEffect(() => {
     asyncFetching(ENDPOINT);
-    document.title = `${query} | MercadoLibre 📦`;
-  }, [query,filter]);
+  }, [query, filter]);
 
   if (error) {
     <div>
@@ -51,15 +55,14 @@ export default function Query() {
     </div>;
   }
 
-  if (isLoading) return <Loading/>
-  
+  if (isLoading) return <Loading />;
 
   if (data?.results.length === 0) {
     <div>No hay resultados de tu producto</div>;
   }
 
   return (
-    <main className="w-full gridCsi mt-12 ">  
+    <main className="w-full gridCsi mt-12 ">
       <div className="w-[250px] text-zinc-700 px-6 ">
         <div aria-label="Resultados y filtros" className="mb-4 ">
           <p className="font-medium text-lg">
@@ -77,9 +80,13 @@ export default function Query() {
                 <h3 className="text-sm font-medium mb-2">{item.name}</h3>
                 <ul className="flex flex-col gap-1 ">
                   {item.values.map((value) => (
-                    <button key={value.id} onClick={() => {
-                      setIsFilter(`${item.id}${value.id}`)
-                    }} className="text-xs text-left text-graytext ">
+                    <button
+                      key={value.id}
+                      onClick={() => {
+                        setIsFilter(`${item.id}${value.id}`);
+                      }}
+                      className="text-xs text-left text-graytext "
+                    >
                       <button>
                         {value.name}{" "}
                         <span>({value.results.toLocaleString()})</span>
@@ -104,9 +111,9 @@ export default function Query() {
               className="flex flex-shrink-0 justify-between h-fit max-h-[250px] rounded-xs border-b p-3 bg-white min-w-[300px]   "
             >
               <div className="w-[350px] ">
-                <img
-                width={50}
-                height={60}
+                <Image
+                  width={50}
+                  height={60}
                   src={`${item.thumbnail}`}
                   alt={`Imagen${item.title}`}
                   className="w-full object-cover h-full  rounded-md"

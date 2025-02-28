@@ -18,7 +18,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/query/${inputRef.current?.value}`);
+    router.push(`/query/${inputRef.current?.value.replaceAll(" ","")}`);
   };
   return (
     <div className="bg-yellowmercado flex flex-nowrap z-50  py-2 justify-center w-full shadow-md">
