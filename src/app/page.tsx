@@ -1,5 +1,7 @@
 "use client";
-//@ts-nocheck
+
+
+
 import ImagenEnvioGratis from "@/ui/image/envio.webp";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -45,7 +47,7 @@ export default function Home() {
       <div className="absolute flex justify-end bg-gradient-to-t from-white/100 to-transparent inset-0"></div>
       <div className="w-full grid place-content-center">
         <div className="grid place-content-center w-[1100px] gap-12">
-          <ul className="flex justify-between gap-5">
+          <div className="flex justify-between gap-5">
             {loading
               ? Array.from({ length: 5 }).map((_, index) => (
                   <SkeletonItem1 key={index} /> // Renderiza el Skeleton mientras carga
@@ -88,14 +90,14 @@ export default function Home() {
                     </div>
                   </Link>
                 ))}
-          </ul>
+          </div>
           <div className="bg-whitespace border p-5 flex-shrink-0 rounded-md shadow-md">
             <h3 className="font-semibold text-lg">
               Inspirado en lo último que viste
             </h3>
             <ul className="flex relative flex-shrink-0 p-3 w-full overflow-x-scroll gap-2">
               <div className="absolute inset-0 z-0 w-full flex justify-between h-full items-center">
-                <button className="px-3 py-1 z-10 flex items-center bg-whitemercado h-12 border rounded-full">
+                <button title="Go to left" className="px-3 py-1 z-10 flex items-center bg-whitemercado h-12 border rounded-full">
                   <Icon
                     icon="mdi:keyboard-arrow-left"
                     width="20"
@@ -103,7 +105,7 @@ export default function Home() {
                     className="text-blue-500"
                   />
                 </button>
-                <button className="px-3 py-1 bg-whitemercado flex items-center h-12  rounded-full border ">
+                <button title="Go to right" className="px-3 py-1 bg-whitemercado flex items-center h-12  rounded-full border ">
                   <Icon
                     icon="mdi:keyboard-arrow-right"
                     width="20"

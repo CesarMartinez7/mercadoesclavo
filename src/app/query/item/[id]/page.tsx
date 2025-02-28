@@ -46,6 +46,7 @@ export default function Item() {
             <div className="flex flex-col  gap-1 rounded-md ">
               {data.pictures.map((img, index) => (
                 <button
+                  title="Change image"
                   onMouseEnter={() => {
                     setImage(img.secure_url);
                   }}
