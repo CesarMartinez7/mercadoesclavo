@@ -6,6 +6,7 @@ import Loading from "./loading";
 import Image from "next/image";
 import UseProducts from "@/hooks/useProducts";
 
+
 export default function Query() {
   const { filter, data, isLoading, error, setFilter } = UseProducts();
 
@@ -36,7 +37,7 @@ export default function Query() {
                 <h3 className="text-sm font-medium mb-2">{item.name}</h3>
                 <ul className="flex flex-col gap-1 ">
                   {item.values.map((value) => (
-                    <button
+                    <li
                       title={`filter ${value.name}`}
                       key={value.id}
                       onClick={() => {
@@ -49,7 +50,7 @@ export default function Query() {
                         {value.name}{" "}
                         <span>({value.results.toLocaleString()})</span>
                       </button>
-                    </button>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -70,9 +71,9 @@ export default function Query() {
             >
               <div className="w-[350px] ">
                 <Image
-                  width={50}
-                  height={60}
-                  src={`${item.thumbnail}`}
+                  width={500}
+                  height={490}
+                  src={`http://http2.mlstatic.com/D_${item.thumbnail_id}-O.jpg`}
                   alt={`Imagen${item.title}`}
                   className="w-full object-cover h-full  rounded-md"
                 />

@@ -30,9 +30,12 @@ interface ReturnUseProducts {
   setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
 // Fix error to filter, pass to string y recoperar el numero y pasar el & siemrpe  cuando haga falta
+
+
+
 export default function UseProducts(): ReturnUseProducts {
   const { query } = useParams();
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState<string>("");
   const [data, setData] = useState<Response>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(true);
