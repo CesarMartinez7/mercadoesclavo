@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Response } from "@/lib/types/response";
 
-const acessToken = process.env.ACCES_TOKEN;
+const accessToken = process.env.ACCES_TOKEN;
 
 interface OpcionesType {
   method: string;
@@ -17,7 +17,7 @@ interface OpcionesType {
 const opciones = {
   method: "GET",
   headers: {
-    Authorization: `Bearer ${acessToken}`,
+    Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
   },
 };
@@ -29,46 +29,47 @@ interface ReturnUseProducts {
   error: boolean;
   setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
-// Fix error to filter, pass to string y recoperar el numero y pasar el & siemrpe  cuando haga falta
 
-
-
+// ⬇️ 1. Mejor estructura: Eliminar ENDPOINT fuera del estado
 export default function UseProducts(): ReturnUseProducts {
   const { query } = useParams();
   const [filter, setFilter] = useState<string>("");
   const [data, setData] = useState<Response>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
   const asyncFetching = async (ENDPOINT: string, opciones: OpcionesType) => {
-    const response = await fetch(ENDPOINT, opciones);
-    if (response.ok) {
-      const data = await response.json();
-      setData(data);
-      setIsLoading(false);
-    } else {
+    setIsLoading(true);
+    setError(false);
+    try {
+      const response = await fetch(ENDPOINT, opciones);
+      if (response.ok) {
+        const data = await response.json();
+        setData(data);
+      } else {
+        setError(true);
+      }
+    } catch {
       setError(true);
-      throw new Error("Error al obtener datos");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const ENDPOINT = `https://api.mercadolibre.com/sites/MLA/search?q=${query}&${filter}`;
-
+  // ⬇️ 2. Mueve ENDPOINT dentro del useEffect
   useEffect(() => {
-    asyncFetching(ENDPOINT, opciones);
-  }, [filter]);
+    if (!query) return; // Evita llamadas innecesarias si no hay `query`
 
+    const ENDPOINT = `https://api.mercadolibre.com/sites/MLA/search?q=${query}${filter}`;
+    asyncFetching(ENDPOINT, opciones);
+  }, [query, filter]); // ⬅️ ENDPOINT ya no es dependencia directa
+
+  // ⬇️ 3. Actualiza el título de la pestaña correctamente
   useEffect(() => {
     if (query) {
-      document.title = `${
-        query?.slice(0, 1).toString().toUpperCase() + query?.slice(1)
-      } | MercadoLibre 📦`;
+      document.title = `${query?.slice(0, 1).toUpperCase() + query?.slice(1)} | MercadoLibre 📦`;
     }
   }, [query]);
 
-  if (data) {
-    return { data, filter, isLoading, error, setFilter };
-  }
   return { data, filter, isLoading, error, setFilter };
-  
 }

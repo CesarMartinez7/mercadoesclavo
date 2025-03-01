@@ -7,6 +7,10 @@ import Image from "next/image";
 import UseProducts from "@/hooks/useProducts";
 
 
+// Puedo utiilizar el metodo conctt con el antiguo estado y actualizarlo asi mas falcil, inicializo el estado con un string y despues concateno todo igual a la la suspension de array de ...
+
+// Hay que llevarlo a la practica sobre todo 
+
 export default function Query() {
   const { filter, data, isLoading, error, setFilter } = UseProducts();
 
@@ -26,6 +30,7 @@ export default function Query() {
             {data?.query.slice(0, 1).toLocaleUpperCase()}
             {data?.query.slice(1)}
           </p>
+          
           <p className="text-xs font-light">
             {data?.paging.total.toLocaleString()} <span>Resultados</span>
           </p>
@@ -41,8 +46,7 @@ export default function Query() {
                       title={`filter ${value.name}`}
                       key={value.id}
                       onClick={() => {
-                        window.alert(filter);
-                        setFilter(`&${filter}${item.id}=${value.id}`);
+                        setFilter(`&${filter}${value.id}=${value.results}`);
                       }}
                       className="text-xs text-left text-graytext "
                     >
@@ -71,6 +75,7 @@ export default function Query() {
             >
               <div className="w-[350px] ">
                 <Image
+                  priority
                   width={500}
                   height={490}
                   src={`http://http2.mlstatic.com/D_${item.thumbnail_id}-O.jpg`}

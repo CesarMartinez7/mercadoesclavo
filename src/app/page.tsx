@@ -61,9 +61,9 @@ export default function Home() {
                     <div className="w-full">
                       <Image
                         className="w-full"
-                        src={i.thumbnail}
-                        width={50}
-                        height={60}
+                        src={`http://http2.mlstatic.com/D_${i.thumbnail_id}-O.jpg`}
+                        width={200}
+                        height={302}
                         alt={`Imagen de ${i.title}`}
                       />
                     </div>
@@ -126,11 +126,11 @@ export default function Home() {
                     >
                       <div className="w-full">
                         <Image
-                          width={50}
-                          height={50}
+                          width={200}
+                          height={100}
                           priority
-                          src={item.thumbnail}
-                          alt="sfsd"
+                          src={`http://http2.mlstatic.com/D_${item.thumbnail_id}-O.jpg`}
+                          alt={`Imagen de ${item.title}`}
                           className="w-full"
                         />
                       </div>
