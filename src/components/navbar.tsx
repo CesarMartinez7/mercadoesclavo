@@ -14,11 +14,12 @@ interface NavbarProps {
 
 export default function Navbar({ categories = Categorias }: NavbarProps) {
   const [isHiddenCategories, setIsHiddenCategories] = useState<boolean>(true);
+  const [inFormactionUser, setInformationUser] = useState<boolean>(false);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/query/${inputRef.current?.value.replaceAll(" ","")}`);
+    router.push(`/query/${inputRef.current?.value.replaceAll(" ", "")}`);
   };
   return (
     <div className="bg-yellowmercado flex flex-nowrap z-50  py-2 justify-center w-full shadow-md">
@@ -73,7 +74,9 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
                 <Icon icon="mdi:location-on-outline" width="26" height="26" />
               </div>
               <div>
-                <p className="font-extralight text-[12px]">Enviar a Cesar</p>
+                <button className="font-extralight text-[12px]">
+                  Enviar a Cesar
+                </button>
                 <p className="text-sm font-medium">Carrera KR 54 #13-31</p>
               </div>
             </div>
@@ -114,7 +117,23 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
           <div className="flex text-[13px] items-center justify-center gap-3 flex-no">
             <div className="flex-1 flex text-center items-center gap-1">
               <span className="py-1 px-2 bg-whitemercado rounded-full">Ce</span>
-              <p>Cesar</p>
+              <div className="relative">
+                <div onMouseEnter={() => setInformationUser(!inFormactionUser)} onMouseLeave={() => setInformationUser(!inFormactionUser) }>Cesar</div>
+                <div
+                  className={`${
+                    inFormactionUser ? "block" : "hidden"
+                  } absolute top-10 bg-whitemercado p-2 rounded-md shadow-lg w-full lg:w-[300px]  `}
+                >
+                  <p>Compras</p>
+                  <p>Historial</p>
+                  <p>Preguntas</p>
+                  <p>Opiniones</p>
+                  <p>Suscripciones</p>
+                  <p>Mercado Play</p>
+                  <p>Vender</p>
+                  <p>Salir</p>
+                </div>
+              </div>
               <span>
                 <Icon
                   icon="mdi:chevron-down"
@@ -141,7 +160,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
               </p>
             </div>
             <button>
-            <Icon icon="tabler:shopping-cart" width="20" height="20" />
+              <Icon icon="tabler:shopping-cart" width="20" height="20" />
             </button>
           </div>
         </div>
