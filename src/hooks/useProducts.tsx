@@ -66,7 +66,7 @@ export default function UseProducts(): ReturnUseProducts {
 
   // ⬇️ 3. Actualiza el título de la pestaña correctamente
   useEffect(() => {
-    if (query) {
+    if (typeof query === "string") {
       document.title = `${query?.slice(0, 1).toUpperCase() + query?.slice(1)} | MercadoLibre 📦`;
     }
   }, [query]);

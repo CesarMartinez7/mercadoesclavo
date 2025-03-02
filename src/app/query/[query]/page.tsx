@@ -144,7 +144,7 @@ export default function Query() {
                   </p>
                 </div>
                 <div className="flex flex-shrink-0 justify-end text-graytext text-xs">
-                  {isPatrocinado ? (<li>{"Promocionado"}</li>)  : <li></li>} 
+                  {isPatrocinado ? (<div>{"Promocionado"}</div>)  : <div></div>} 
                 </div>
               </div>
             </Link>
