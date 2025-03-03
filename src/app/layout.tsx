@@ -35,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${ubuntu.className} antialiased w-full h-full`}>
+      <body className={` ${ubuntu.className} antialiased w-full h-full relative`}>
         <Navbar categories={Categorias} />
         {children}
       <Footer/> 

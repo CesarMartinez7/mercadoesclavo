@@ -14,7 +14,7 @@ export default function SkeletonItem1() {
 
 export function SkeletonItem2() {
   return (
-    <li className="border  grid grid-cols-2 gap-2 rounded-md p- w-[900px] h-40 z-10 p-4">
+    <li className="border bg-whitemercado  grid grid-cols-2 gap-2 rounded-md p- w-[900px] h-40 z-10 p-4">
       <div className="rounded-md bg-zinc-200 h-full w-full animate-pulse "></div>
       <div className="h-full flex flex-col gap-3 px-5 py-5 ">
         <div className="rounded-md w-full h-[14px] bg-zinc-200 animate-pulse"></div>

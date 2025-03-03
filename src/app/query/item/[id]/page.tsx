@@ -33,6 +33,8 @@ export default function Item() {
   },[])
 
 
+  
+
   if (data) {
     return (
       <div className="bg-graymercado flex-col items-center flex gap-4 w-full ">
@@ -159,7 +161,7 @@ export default function Item() {
                     <span className="text-green-500 font-semibold">
                       {data.shipping.free_shipping ? "Envio gratis " : `Envio`}
                     </span>
-                    {""}
+                    {" "}
                     entre el sabado y lunes
                   </p>
                   <p className="text-blue-500 text-left text-sm">

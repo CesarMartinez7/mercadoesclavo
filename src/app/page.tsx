@@ -9,6 +9,7 @@ import { Response } from "@/lib/types/response";
 import SkeletonItem1 from "@/components/skeletons/item-skeleton";
 import Link from "next/link";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Footer from "@/components/foooter";
 
 const accessToken = process.env.ASCES_TOKEN;
 
@@ -44,8 +45,8 @@ export default function Home() {
           alt="Imagen de Envío Gratis"
         />
       </div>
-      <div className="absolute flex justify-end bg-gradient-to-t from-white/100 to-transparent inset-0"></div>
-      <div className="w-full grid place-content-center">
+      <div className="relative flex justify-end bg-gradient-to-t from-white/100 to-transparent inset-0"></div>
+      <div className="w-full grid place-content-center relative">
         <div className="grid place-content-center w-[1100px] gap-12">
           <div className="flex justify-between gap-5">
             {loading
@@ -155,6 +156,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer/>
     </main>
   );
 }

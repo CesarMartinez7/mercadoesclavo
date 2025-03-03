@@ -116,18 +116,44 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
           </div>
           <div className="flex text-[13px] items-center justify-center gap-3 flex-no">
             <div className="flex-1 flex text-center items-center gap-1">
-              <span className="py-1 px-2 bg-whitemercado rounded-full">Ce</span>
+              <span className="py-1 px-2 bg-whitemercado rounded-full ">Ce</span>
               <div className="relative">
-                <div onMouseEnter={() => setInformationUser(!inFormactionUser)} onMouseLeave={() => setInformationUser(!inFormactionUser) }>Cesar</div>
+                <div
+                  className="cursor-pointer"
+                  onMouseEnter={() => setInformationUser(!inFormactionUser)}
+                  onMouseLeave={() => setInformationUser(!inFormactionUser)}
+                >
+                  Cesar
+                </div>
                 <div
                   className={`${
                     inFormactionUser ? "block" : "hidden"
-                  } absolute top-10 bg-whitemercado p-2 rounded-md shadow-lg w-full lg:w-[300px]  `}
+                  } absolute top-3 z-40 bg-whitemercado rounded-md shadow-lg w-full lg:w-[300px] flex gap-4 flex-col items-start p-4 modal-card`}
+                  onMouseEnter={() => setInformationUser(true)}
+                  onMouseLeave={() => setInformationUser(false)}
                 >
+                  <div className=" w-full h-full flex ">
+                    <span className="w-12 rounded-full bg-graymercado h-12 flex items-center justify-center">
+                      CM
+                    </span>
+                    <div className="h-full relative  mx-2 my-2">
+                      <div className="flex h-full flex-col items-start justify-center ">
+                        <span className="font-bold">Cesar</span>
+                        <span>Mi perfil {">"}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-gradient-to-r shadow-xl from-[#A90F90] h-10  to-[#151954] font-bold items-center w-full justify-start px-5 flex rounded-tr-full rounded-br-full rounded-bl-full">
+                    <span className="text-white text-base">
+                      Suscribete al nivel 6
+                    </span>
+                  </div>
+                  <div className="border border-t-1 w-full border-zinc-200"></div>
                   <p>Compras</p>
                   <p>Historial</p>
                   <p>Preguntas</p>
                   <p>Opiniones</p>
+                  <div className="border border-t-1 w-full"></div>
                   <p>Suscripciones</p>
                   <p>Mercado Play</p>
                   <p>Vender</p>
@@ -159,7 +185,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
                 </span>
               </p>
             </div>
-            <button>
+            <button title="shoppin card">
               <Icon icon="tabler:shopping-cart" width="20" height="20" />
             </button>
           </div>
