@@ -73,14 +73,14 @@ export default function Query() {
               key={item.id}
               className="flex flex-shrink-0 justify-between h-fit max-h-[250px] rounded-xs border-b p-3 bg-white min-w-[300px]   "
             >
-              <div className="w-[350px] ">
+              <div className="w-[350px]  ">
                 <Image
                   priority
-                  width={500}
-                  height={490}
+                  width={400}
+                  height={290}
                   src={`http://http2.mlstatic.com/D_${item.thumbnail_id}-O.jpg`}
-                  alt={`Imagen${item.title}`}
-                  className="w-full object-cover h-full  rounded-md"
+                  alt={`Imagen ${item.title}`}
+                  className="w-full object-contain h-full  rounded-md"
                 />
               </div>
               <div className="w-full py-6 px-2 flex-grow-0">
