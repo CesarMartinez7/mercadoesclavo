@@ -5,12 +5,25 @@ import { ItemInterface } from "@/lib/types/response-item";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 
+
 export default function Item() {
   const { id } = useParams();
   const stringId: string | string[] = id ? id : "no se";
   const [data, setData] = useState<ItemInterface>();
   const endpoint = `https://api.mercadolibre.com/items/${stringId}`;
   const [image, setImage] = useState<string>("");
+
+
+
+  // const [review,setReview] = useState()
+
+
+  // // useEffect(() => {
+  // //   fetch("https://api.mercadolibre.com/reviews/item/MLA1432080941",opciones).then(response => response.json()).then(data => setReview(data))
+  // //   console.log(review)
+  // // },[])
+
+
 
   const fetchingAsync = async (endpoint: string) => {
     try {
@@ -27,141 +40,147 @@ export default function Item() {
   }, []);
 
   useEffect(() => {
-    if(data?.pictures){
-      setImage(data?.pictures[0].secure_url)
+    if (data?.pictures) {
+      setImage(data?.pictures[0].secure_url);
     }
-  },[])
-
-
-  
+  }, []);
 
   if (data) {
     return (
       <div className="bg-graymercado flex-col items-center flex gap-4 w-full ">
-        <div className="w-[60vw]  ">
+        <div className=" w-full md:w-[900px] lg:w-[1100px]">
           <p className="text-blue-500 text-xs mt-3 px-6">
-            Volver al listado Electrónica {">"} {`${data.title}`} 
+            Volver al listado Electrónica {">"} {`${data.title}`}
           </p>
         </div>
-        <div className="p-6 bg-whitemercado w-[1100px] rounded-sm shadow-sm grid-cols-3 grid gap-6">
-          <div className="flex gap-4  ">
-            <div className="flex flex-col  gap-1 rounded-md ">
-              {data.pictures.map((img, index) => (
-                <button
-                  title="Change image"
-                  onMouseEnter={() => {
-                    setImage(img.secure_url);
-                  }}
-                  key={img.id}
-                  className="p-2 border border-zinc-300 rounded-md"
-                >
-                  <Image
-                    src={img.secure_url}
-                    width={90}
-                    height={90}
-                    priority
-                    className="max-h-10 object-contain"
-                    alt={`Imagen ${index} ${data.title}`}
-                  />
-                </button>
-              ))}
-            </div>
-            <div aria-label="images ascesibles" >
-              <Image
-                src={image ? image : data.pictures[0].secure_url }
-                alt={`Imagen de ${data?.title}`}
-                width={500}
-                height={500}
-                className="max-h-fit"
-                priority
-              />
-            </div>
-          </div>
-          <div className="py-4">
-            <section className="mt-12">
-              <h3 className="font-bold text-xl">{data?.title}</h3>
-              <div aria-label="Puntuacion" className="flex my-5">
-                <Icon
-                  icon="mdi:star"
-                  className="text-blue-500"
-                  width="15"
-                  height="15"
-                />
-                <Icon
-                  icon="mdi:star"
-                  className="text-blue-500"
-                  width="15"
-                  height="15"
-                />
-                <Icon
-                  icon="mdi:star"
-                  className="text-blue-500"
-                  width="15"
-                  height="15"
-                />
-                <Icon
-                  icon="mdi:star"
-                  className="text-blue-500"
-                  width="15"
-                  height="15"
-                />
-                <Icon
-                  icon="mdi:star"
-                  className="text-blue-500"
-                  width="15"
-                  height="15"
+        <div className="p-6 bg-whitemercado lg:w-[1100px] h-auto rounded-sm shadow-sm grid grid-cols-1 md:flex gap-6 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full ">
+            <div className="flex flex-col-reverse  md:flex-row">
+              <div className="flex flex-row-reverse md:flex-col w-16 h-[100px] gap-1 rounded-md ">
+                {data.pictures.map((img, index) => (
+                  <button
+                    title="Change image"
+                    onMouseEnter={() => {
+                      setImage(img.secure_url);
+                    }}
+                    key={img.id}
+                    className="p-2 border border-zinc-300 rounded-md"
+                  >
+                    <Image
+                      src={img.secure_url}
+                      width={90}
+                      height={90}
+                      priority
+                      className="max-h-10 object-contain"
+                      alt={`Imagen ${index} ${data.title}`}
+                    />
+                  </button>
+                ))}
+              </div>
+              <div aria-label="Imagenes Accesibles">
+                <Image
+                  src={image ? image : data.pictures[0].secure_url}
+                  alt={`Imagen de ${data?.title}`}
+                  width={500}
+                  height={500}
+                  className="max-h-fit"
+                  priority
                 />
               </div>
-              <p className="text-sm text-graytext line-through">
-                $ {data?.price.toLocaleString()}
-              </p>
-              <p className="text-4xl font-light text-zinc-900">
-                {" "}
-                $ {data?.base_price.toLocaleString()}
-              </p>
-              <p>
-                en{" "}
-                <span className="text-green-600">
-                  12 cuotas de $ {Number(data?.price / 12).toString().slice(0,7)} con 0% interes
-                </span>{" "}
-              </p>
-              <button className="text-xs text-blue-500">
-                Ver los medios de pago
-              </button>
-              <div className="text-sm" aria-label="Caracteristicas productos">
-                <h3 className="font-semibold text-zinc-700 mt-12  ">
-                  Lo que tienes que saber de este producto
-                </h3>
-                <div className="list-disc text-[13px] text-zinc-700">
-                  {data.attributes.length > 12 ? (
-                    <ul className="mt-4 list-disc flex flex-col gap-1.5 pl-4">
-                      {data.attributes.slice(0, 11).map((attr) => (
+            </div>
+
+            <div className="py-4">
+              <section className="mt-12">
+                <h3 className="font-bold text-xl">{data?.title}</h3>
+                {/* <div aria-label="Puntuacion" className="flex my-5">
+                  <Icon
+                    icon="mdi:star"
+                    className="text-blue-500"
+                    width="15"
+                    height="15"
+                  />
+                  <Icon
+                    icon="mdi:star"
+                    className="text-blue-500"
+                    width="15"
+                    height="15"
+                  />
+                  <Icon
+                    icon="mdi:star"
+                    className="text-blue-500"
+                    width="15"
+                    height="15"
+                  />
+                  <Icon
+                    icon="mdi:star"
+                    className="text-blue-500"
+                    width="15"
+                    height="15"
+                  />
+                  <Icon
+                    icon="mdi:star"
+                    className="text-blue-500"
+                    width="15"
+                    height="15"
+                  />
+                </div> */}
+                <p className="text-sm text-graytext line-through">
+                  $ {data?.price.toLocaleString()}
+                </p>
+                <p className="text-4xl font-light text-zinc-900">
+                  {" "}
+                  $ {data?.base_price.toLocaleString()}
+                </p>
+                <p>
+                  en{" "}
+                  <span className="text-green-600">
+                    12 cuotas de ${" "}
+                    {Number(data?.price / 12)
+                      .toString()
+                      .slice(0, 7)}{" "}
+                    con 0% interes
+                  </span>{" "}
+                </p>
+                <button className="text-xs text-blue-500">
+                  Ver los medios de pago
+                </button>
+                <div className="text-sm" aria-label="Caracteristicas productos">
+                  <h3 className="font-semibold text-zinc-700 mt-12  ">
+                    Lo que tienes que saber de este producto
+                  </h3>
+                  <div className="list-disc text-[13px] text-zinc-700">
+                    {data.attributes.length > 12 ? (
+                      <ul className="mt-4 list-disc flex flex-col gap-1.5 pl-4">
+                        {data.attributes.slice(0, 11).map((attr) => (
+                          <li key={attr.id}>
+                            {attr.name} : {attr.value_name}
+                          </li>
+                        ))}
+                        <p className="text-blue-500">Ver mas caracteristicas</p>
+                      </ul>
+                    ) : (
+                      data.attributes.map((attr) => (
                         <li key={attr.id}>
                           {attr.name} : {attr.value_name}
                         </li>
-                      ))}
-                      <p className="text-blue-500">Ver mas caracteristicas</p>
-                    </ul>
-                  ) : (
-                    data.attributes.map((attr) => (
-                      <li key={attr.id}>
-                        {attr.name} : {attr.value_name}
-                      </li>
-                    ))
-                  )}
+                      ))
+                    )}
+                  </div>
+                  
                 </div>
-              </div>
-            </section>
+                
+              </section>
+            </div>
           </div>
-          <article className="flex flex-col ">
+
+          <article className="flex flex-col  md:w-3/6 lg:w-2/5 ">
             <div className="py-[25px] px-[16px] border border-zinc-200  rounded-md">
               <div className=" flex flex-col gap-5 ">
                 <div>
                   <p className="text-sm">
                     <span className="text-green-500 font-semibold">
                       {data.shipping.free_shipping ? "Envio gratis " : `Envio`}
-                    </span>
-                    {" "}
+                    </span>{" "}
                     entre el sabado y lunes
                   </p>
                   <p className="text-blue-500 text-left text-sm">

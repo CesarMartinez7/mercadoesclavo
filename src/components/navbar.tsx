@@ -23,7 +23,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
   };
   return (
     <div className="bg-yellowmercado flex flex-nowrap z-50  py-2 justify-center w-full shadow-md">
-      <header className="px-3 flex flex-col">
+      <header className="md:px-3 flex flex-col">
         <div className="flex justify-between gap-12  items-center mb-3 ">
           <Link href={"/"}>
             <Image
@@ -36,7 +36,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
           </Link>
           <div>
             <form onSubmit={handleSubmit} className="w-full">
-              <label className="w-[500px] rounded-sm shadow-md bg-white h-full px-4 py-2 flex">
+              <label className="md:w-[500px] rounded-sm shadow-md bg-white h-full px-4 py-2 flex">
                 <input
                   ref={inputRef}
                   type="text"
@@ -60,7 +60,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
               width={"340"}
               height={"39"}
               alt="Imagen mercado libre logo"
-              className="max-w-[340px] max-h-[39px]"
+              className="md:max-w-[340px] md:max-h-[39px] lg:block hidden"
             />
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
                 <div
                   className={`${
                     inFormactionUser ? "block" : "hidden"
-                  } absolute top-3 z-40 bg-whitemercado rounded-md shadow-lg w-full lg:w-[300px] flex gap-4 flex-col items-start p-4 modal-card`}
+                  } absolute top-3 z-40 bg-green-500 rounded-md shadow-lg w-[200px] lg:w-[300px] flex gap-4 flex-col items-start p-4 modal-card `}
                   onMouseEnter={() => setInformationUser(true)}
                   onMouseLeave={() => setInformationUser(false)}
                 >
@@ -169,7 +169,7 @@ export default function Navbar({ categories = Categorias }: NavbarProps) {
                 />
               </span>
             </div>
-            <div className="flex-1 text-center whitespace-nowrap">
+            <div className="flex-1 text-center md:whitespace-nowrap">
               <p>Mis compras</p>
             </div>
             <div className="flex-1 text-center">

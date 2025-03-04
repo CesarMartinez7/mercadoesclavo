@@ -14,7 +14,7 @@ interface OpcionesType {
   };
 }
 
-const opciones = {
+export const opciones = {
   method: "GET",
   headers: {
     Authorization: `Bearer ${accessToken}`,

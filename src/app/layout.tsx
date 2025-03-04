@@ -1,8 +1,9 @@
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import { Ubuntu } from "next/font/google";
+import Head from "next/head";
+
 const ubuntu = Ubuntu({ weight: "300", subsets: ["latin"] });
-import Footer from "@/components/foooter";
 
 const Categorias: string[] = [
   "Vehículos",
@@ -35,10 +36,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${ubuntu.className} antialiased w-full h-full relative`}>
+      <Head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      </Head>
+      <body className={`${ubuntu.className} antialiased w-full h-full relative`}>
         <Navbar categories={Categorias} />
         {children}
-      <Footer/> 
       </body>
     </html>
   );
