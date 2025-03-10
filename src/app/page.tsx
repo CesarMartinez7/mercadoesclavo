@@ -25,6 +25,11 @@ export default function Home() {
     },
   };
 
+
+  useEffect(() => {
+    window.alert("Si estás aquí para ver mi proyecto, lamento informarte que no podrás experimentar la magia en este momento. 🪄✨ Actualmente, estoy enfrentando algunos problemas con CORS (Cross-Origin Resource Sharing), pero no te preocupes, ¡estoy trabajando en ello! \n🚀 ¡Estaré de vuelta lo antes posible! 🚀 ")
+  },[])
+
   const endpoint = `https://api.mercadolibre.com/sites/MLA/search?q=tecnologia`;
 
   useEffect(() => {
